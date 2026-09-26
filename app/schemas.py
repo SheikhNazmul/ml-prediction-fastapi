@@ -1,4 +1,6 @@
-from pydantic import BaseModel, Field
+from datetime import datetime
+
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class PredictionRequest(BaseModel):
@@ -14,3 +16,14 @@ class PredictionResponse(BaseModel):
     predicted_class: int
     class_name: str
     probabilities: list[float]
+
+
+class PredictionHistoryResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    features: list[float]
+    predicted_class: int
+    class_name: str
+    probabilities: list[float]
+    created_at: datetime
